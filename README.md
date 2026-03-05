@@ -15,15 +15,21 @@ Stock:  ██░░░ 35%
 Ours:   ███░░░░░░░ 35%
 ```
 
-### Earlier color thresholds
+### Earlier color thresholds (the "Dumb Zone")
 
-Stock claudeline stays green until 70%, then yellow, then red near compaction. We found that by the time the bar turns yellow at 70%, you're already running low and it's too late to course-correct. Our thresholds give you more warning:
+Stock claudeline stays green until 70%, then yellow, then red near compaction. By 70% you're already deep in what we call the **Dumb Zone** — and it's too late to course-correct.
 
-| Range | Color | Rationale |
-|-------|-------|-----------|
-| 0–40% | Green | Plenty of room, work freely |
-| 41–60% | Yellow | Heads up — start wrapping up or think about compaction |
-| 61%+ | Red | Running low, finish up or start a new session |
+The concept comes from [this video by Dex](https://www.youtube.com/watch?v=rmvDxxNubIg&t=493s): your context window has roughly 168,000 tokens, and around the 40% mark you start getting diminishing returns. The more of the window you've used up, the worse the model performs. If your context is packed with MCP JSON dumps, file searches, test output, and UUIDs, you're doing all your actual work in the zone where the model is least capable.
+
+The fix is **intentional compaction** — regularly compressing your context before you hit that zone. You condense your working state into a markdown summary (specific files, line numbers, decisions made, the problem being solved), then start a fresh context window. The new session picks up from the summary and works in the "smart zone" instead of wading through stale noise.
+
+Our thresholds are designed around this workflow:
+
+| Range | Color | Meaning |
+|-------|-------|---------|
+| 0–40% | Green | Smart zone — full performance, work freely |
+| 41–60% | Yellow | Approaching the dumb zone — wrap up your current task or compact |
+| 61%+ | Red | In the dumb zone — compact now or start fresh |
 
 The compaction warning (`⚠`) from upstream still triggers at 80% as a final alert.
 
