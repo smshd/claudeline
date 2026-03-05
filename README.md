@@ -1,4 +1,4 @@
-# claudeline-dumb-zones
+# claudeline-dex-horthy-dumb-zones
 
 A fork of [fredrikaverpil/claudeline](https://github.com/fredrikaverpil/claudeline) — a minimalistic Claude Code status line written in Go.
 
@@ -39,8 +39,8 @@ All other features — subscription plan label, 5-hour/7-day quota bars, git bra
 1. Clone and build:
 
 ```bash
-git clone https://github.com/smshd/claudeline-dumb-zones.git
-cd claudeline-dumb-zones
+git clone https://github.com/smshd/claudeline-dex-horthy-dumb-zones.git
+cd claudeline-dex-horthy-dumb-zones
 go build -o ~/.local/bin/claudeline .
 ```
 
